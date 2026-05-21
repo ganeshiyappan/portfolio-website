@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ganesh Iyappan — Power BI Developer & Data Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0D0D0F;
+  --surface: #141416;
+  --surface2: #1C1C1F;
+  --surface3: #242428;
+  --text: #F0EEE8;
+  --muted: #9A9894;
+  --hint: #5A5855;
+  --accent: #C8A96E;
+  --accent2: #8FB4D4;
+  --accent3: #7DC4A0;
+  --border: rgba(240,238,232,0.08);
+  --border2: rgba(240,238,232,0.14);
+  --radius: 8px;
+  --radius-lg: 14px;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Outfit', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);font-size:15px;line-height:1.6;min-height:100vh}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:62px;background:rgba(13,13,15,0.88);backdrop-filter:blur(16px);border-bottom:0.5px solid var(--border)}
+.logo{font-family:var(--font-display);font-size:18px;color:var(--text);letter-spacing:-0.01em}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2rem}
+.nav-links a{font-size:13px;font-weight:400;color:var(--muted);text-decoration:none;letter-spacing:0.03em;transition:color 0.2s}
+.nav-links a:hover{color:var(--text)}
+.nav-badge{font-size:11px;font-weight:500;padding:3px 10px;background:rgba(124,196,160,0.12);color:var(--accent3);border:0.5px solid rgba(124,196,160,0.25);border-radius:100px;letter-spacing:0.04em}
+
+/* HERO */
+.hero{padding:6rem 3rem 4rem;max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 380px;gap:4rem;align-items:start}
+.hero-tag{font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:8px}
+.hero-tag::before{content:'';width:28px;height:1px;background:var(--accent)}
+.hero h1{font-family:var(--font-display);font-size:clamp(2.6rem,3.8vw,3.8rem);line-height:1.08;font-weight:500;letter-spacing:-0.03em;margin-bottom:1.5rem}
+.hero h1 .line2{font-style:italic;color:var(--accent)}
+.hero-bio{font-size:15px;color:var(--muted);line-height:1.8;max-width:480px;margin-bottom:2.5rem;font-weight:300}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:3rem}
+.btn{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;padding:10px 20px;border-radius:var(--radius);text-decoration:none;letter-spacing:0.02em;transition:all 0.2s;cursor:pointer;border:none}
+.btn-primary{background:var(--accent);color:#0D0D0F}
+.btn-primary:hover{background:#D4B87A}
+.btn-ghost{background:transparent;color:var(--muted);border:0.5px solid var(--border2)}
+.btn-ghost:hover{color:var(--text);border-color:var(--border2)}
+.contact-items{display:flex;flex-direction:column;gap:10px}
+.contact-item{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.contact-item:hover{color:var(--text)}
+.contact-icon{width:32px;height:32px;background:var(--surface2);border:0.5px solid var(--border);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.contact-icon svg{width:14px;height:14px;stroke:var(--muted);fill:none;stroke-width:1.8}
+
+/* HERO RIGHT — stat cluster */
+.hero-stats{display:flex;flex-direction:column;gap:12px}
+.stat-big{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem}
+.stat-big .num{font-family:var(--font-display);font-size:3rem;line-height:1;color:var(--accent);margin-bottom:6px}
+.stat-big .lbl{font-size:12px;color:var(--muted);font-weight:400;letter-spacing:0.04em}
+.stat-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat-sm{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem}
+.stat-sm .num{font-family:var(--font-display);font-size:2rem;color:var(--accent2);line-height:1;margin-bottom:4px}
+.stat-sm .lbl{font-size:11px;color:var(--muted)}
+
+/* DIVIDER */
+.divider{height:0.5px;background:var(--border);max-width:1160px;margin:0 auto}
+
+/* SECTION */
+.section-wrap{max-width:1160px;margin:0 auto;padding:0 3rem}
+.main-grid{display:grid;grid-template-columns:1fr 340px;gap:2.5rem;padding:3rem 0 5rem;align-items:start}
+.sec-label{font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--hint);margin-bottom:1.5rem;display:flex;align-items:center;gap:10px}
+.sec-label::after{content:'';flex:1;height:0.5px;background:var(--border)}
+.section{margin-bottom:3.5rem}
+
+/* TIMELINE */
+.tl{display:flex;flex-direction:column}
+.tl-item{display:flex;gap:1.25rem}
+.tl-gutter{display:flex;flex-direction:column;align-items:center;padding-top:4px;width:14px;flex-shrink:0}
+.tl-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.tl-line{width:0.5px;flex:1;background:var(--border);margin-top:5px}
+.tl-body{flex:1;padding-bottom:2.5rem}
+.tl-date{font-family:var(--font-mono);font-size:10px;color:var(--hint);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:5px}
+.tl-title{font-size:16px;font-weight:600;margin-bottom:3px}
+.tl-org{font-size:13px;color:var(--muted);margin-bottom:1rem}
+.tl-client{font-family:var(--font-mono);font-size:10px;font-weight:500;color:var(--accent2);letter-spacing:0.08em;text-transform:uppercase;margin:1rem 0 8px}
+.tl-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:5px}
+.tl-list li{font-size:13.5px;color:var(--muted);line-height:1.65;padding-left:18px;position:relative;font-weight:300}
+.tl-list li::before{content:'›';position:absolute;left:0;color:var(--accent);font-size:15px;line-height:1.5}
+
+/* CALLOUT */
+.callout{display:flex;gap:12px;background:rgba(200,169,110,0.07);border:0.5px solid rgba(200,169,110,0.2);border-radius:var(--radius-lg);padding:14px 16px;margin-bottom:14px}
+.callout-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.callout p{font-size:13px;color:var(--accent);line-height:1.6;font-weight:500}
+
+/* PROJECTS */
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.proj-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;transition:border-color 0.25s,transform 0.2s}
+.proj-card:hover{border-color:var(--border2);transform:translateY(-3px)}
+.proj-num{font-family:var(--font-mono);font-size:11px;color:var(--hint);margin-bottom:10px}
+.proj-title{font-size:14px;font-weight:600;margin-bottom:8px}
+.proj-desc{font-size:12.5px;color:var(--muted);line-height:1.65;font-weight:300}
+.proj-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}
+.proj-tag{font-size:11px;padding:2px 8px;background:var(--surface3);border-radius:100px;color:var(--hint)}
+
+/* SIDEBAR */
+.sidebar{display:flex;flex-direction:column;gap:1.5rem;position:sticky;top:80px}
+.card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem}
+.card-title{font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--hint);margin-bottom:1.1rem}
+
+/* SKILLS */
+.skill-group{margin-bottom:14px}
+.skill-group:last-child{margin-bottom:0}
+.skill-name{font-size:11px;font-weight:500;color:var(--muted);margin-bottom:7px;letter-spacing:0.03em}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-size:11.5px;padding:4px 10px;background:var(--surface3);border:0.5px solid var(--border);border-radius:100px;color:var(--muted)}
+.tag.hl{background:rgba(143,180,212,0.12);color:var(--accent2);border-color:rgba(143,180,212,0.2)}
+.tag.hl2{background:rgba(200,169,110,0.1);color:var(--accent);border-color:rgba(200,169,110,0.2)}
+
+/* CERT */
+.cert-item{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:0.5px solid var(--border)}
+.cert-item:last-child{border-bottom:none;padding-bottom:0}
+.cert-dot{width:6px;height:6px;border-radius:50%;background:var(--accent3);flex-shrink:0;margin-top:6px}
+.cert-name{font-size:12.5px;font-weight:500;line-height:1.4}
+.cert-issuer{font-size:11px;color:var(--hint);margin-top:2px}
+
+/* EDU */
+.edu-item{padding:10px 0;border-bottom:0.5px solid var(--border)}
+.edu-item:last-child{border-bottom:none;padding-bottom:0}
+.edu-deg{font-size:13px;font-weight:600;line-height:1.4;margin-bottom:4px}
+.edu-school{font-size:12px;color:var(--muted);font-weight:300;line-height:1.4}
+.edu-year{font-family:var(--font-mono);font-size:10px;color:var(--hint);margin-top:4px;letter-spacing:0.05em}
+.edu-badge{display:inline-block;font-size:10px;padding:2px 8px;background:rgba(124,196,160,0.12);color:var(--accent3);border:0.5px solid rgba(124,196,160,0.2);border-radius:100px;margin-top:5px;font-weight:500}
+
+/* ACH */
+.ach-item{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:0.5px solid var(--border)}
+.ach-item:last-child{border-bottom:none;padding-bottom:0}
+.ach-glyph{font-size:16px;flex-shrink:0;line-height:1.5}
+.ach-name{font-size:12.5px;font-weight:500;margin-bottom:2px}
+.ach-desc{font-size:12px;color:var(--muted);line-height:1.55;font-weight:300}
+
+/* FOOTER */
+footer{border-top:0.5px solid var(--border);padding:2rem 3rem;max-width:1160px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+footer p{font-size:12px;color:var(--hint)}
+.footer-name{font-family:var(--font-display);font-size:15px;color:var(--text)}
+
+/* SCROLL ANIMATION */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;padding:3rem 1.5rem 2.5rem}
+  .hero-stats{flex-direction:row;flex-wrap:wrap}
+  .stat-big{flex:1;min-width:140px}
+  .stat-row{display:contents}
+  .stat-sm{flex:1;min-width:120px}
+  .main-grid{grid-template-columns:1fr}
+  .sidebar{position:static}
+  nav{padding:0 1.5rem}
+  .nav-links{gap:1.25rem}
+  .section-wrap{padding:0 1.5rem}
+  footer{padding:1.5rem}
+  .proj-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">Ganesh <span>Iyappan</span></span>
+  <div class="nav-links">
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#education">Education</a>
+  </div>
+  <span class="nav-badge">Open to opportunities</span>
+</nav>
+
+<section class="hero" id="top">
+  <div>
+    <div class="hero-tag">Power BI Developer &amp; Data Analyst</div>
+    <h1>Data that<br><span class="line2">drives decisions.</span></h1>
+    <p class="hero-bio">4+ years shaping data strategy across Insurance, Investments and Banking. Currently deepening expertise with an MSc in Business Analytics at the University of Galway — building dashboards, automating pipelines and making numbers mean something.</p>
+    <div class="cta-row">
+      <a href="mailto:ganeshiyappan01@gmail.com" class="btn btn-primary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        Get in touch
+      </a>
+      <a href="#" class="btn btn-ghost">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+        GitHub
+      </a>
+      <a href="#" class="btn btn-ghost">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+    </div>
+    <div class="contact-items">
+      <a href="mailto:ganeshiyappan01@gmail.com" class="contact-item">
+        <div class="contact-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg></div>
+        ganeshiyappan01@gmail.com
+      </a>
+      <span class="contact-item">
+        <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.18 2.2 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+        +353 089 428 9880
+      </span>
+      <span class="contact-item">
+        <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        Galway, Ireland
+      </span>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-big reveal">
+      <div class="num">4+</div>
+      <div class="lbl">Years of industry experience</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-sm reveal"><div class="num">95%</div><div class="lbl">Process efficiency gain</div></div>
+      <div class="stat-sm reveal"><div class="num">3</div><div class="lbl">Industries served</div></div>
+      <div class="stat-sm reveal"><div class="num">5</div><div class="lbl">Certifications</div></div>
+      <div class="stat-sm reveal"><div class="num" style="color:var(--accent3)">1.1</div><div class="lbl">MSc expected grade</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<div class="section-wrap">
+  <div class="main-grid">
+
+    <div>
+
+      <!-- EXPERIENCE -->
+      <section class="section" id="experience">
+        <div class="sec-label">Work experience</div>
+        <div class="tl">
+
+          <div class="tl-item reveal">
+            <div class="tl-gutter"><div class="tl-dot"></div><div class="tl-line"></div></div>
+            <div class="tl-body">
+              <div class="tl-date">Jan 2026 – Present</div>
+              <div class="tl-title">Graduate Teaching Assistant</div>
+              <div class="tl-org">University of Galway, Ireland</div>
+              <ul class="tl-list">
+                <li>Student coordination, workshop facilitation and attendance management</li>
+                <li>Continuous collaboration with business mentors to support industry-aligned learning outcomes</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-gutter"><div class="tl-dot"></div><div class="tl-line"></div></div>
+            <div class="tl-body">
+              <div class="tl-date">Sep 2021 – Aug 2025</div>
+              <div class="tl-title">Software Engineer</div>
+              <div class="tl-org">Mphasis Ltd, India</div>
+
+              <div class="tl-client">AIG / Corebridge Financial — May 2024 to Aug 2025</div>
+              <div class="callout">
+                <div class="callout-icon">⚡</div>
+                <p>Automated a business-as-usual process, cutting execution time from 8 hours to 5 minutes — a 95%+ efficiency improvement.</p>
+              </div>
+              <ul class="tl-list">
+                <li>Developed and maintained Power BI dashboards for loan status monitoring across Agricultural and Mezzanine portfolios</li>
+                <li>Designed paginated reports supporting decision-making for diverse loan portfolios</li>
+                <li>Executed DDL and DML statements to create, update and manage loan-related database tables</li>
+                <li>Analysed commercial real estate risk for USA and international portfolios</li>
+                <li>Calculated DSCR and key risk metrics to identify underperforming loans and mitigate financial exposure</li>
+                <li>Implemented Snowflake as central data warehouse with API integrations and automated overnight ingestion jobs</li>
+                <li>Coordinated property inspection tracking and collateral condition monitoring</li>
+              </ul>
+
+              <div class="tl-client">RBS / NatWest — Sep 2024 to Apr 2025</div>
+              <ul class="tl-list">
+                <li>Monitored and managed Autosys batch jobs and critical billing processes on Linux terminals</li>
+                <li>Facilitated the monthly billing cycle in MS SQL Server ensuring accurate customer billing</li>
+                <li>Managed incident tickets with root-cause analysis and timely resolution</li>
+                <li>Built a Power Apps assessment tool with automated workflows via Power Automate</li>
+                <li>Led junior team members to automate HCM-based resource tracking on SharePoint</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-gutter"><div class="tl-dot"></div></div>
+            <div class="tl-body">
+              <div class="tl-date">2017 – 2021</div>
+              <div class="tl-title">BEng Graduate</div>
+              <div class="tl-org">Electronics &amp; Communication Engineering, Vel Tech, India</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section class="section" id="projects">
+        <div class="sec-label">Key projects</div>
+        <div class="proj-grid">
+
+          <div class="proj-card reveal">
+            <div class="proj-num">01</div>
+            <div class="proj-title">Loan Management System</div>
+            <div class="proj-desc">Power BI dashboards and paginated reports for monitoring Agricultural and Mezzanine loan portfolios with Snowflake data warehouse integration and automated ingestion.</div>
+            <div class="proj-tags"><span class="proj-tag">Power BI</span><span class="proj-tag">Snowflake</span><span class="proj-tag">SQL</span></div>
+          </div>
+
+          <div class="proj-card reveal">
+            <div class="proj-num">02</div>
+            <div class="proj-title">Loan Risk Analysis</div>
+            <div class="proj-desc">Commercial real estate risk assessment for US and international portfolios. DSCR calculations, quarterly loan reviews and property inspection tracking.</div>
+            <div class="proj-tags"><span class="proj-tag">Risk Analysis</span><span class="proj-tag">DSCR</span><span class="proj-tag">Power BI</span></div>
+          </div>
+
+          <div class="proj-card reveal">
+            <div class="proj-num">03</div>
+            <div class="proj-title">Billing System — NatWest</div>
+            <div class="proj-desc">End-to-end billing cycle management in MS SQL Server with Autosys batch job monitoring and incident root-cause analysis to minimise downstream impact.</div>
+            <div class="proj-tags"><span class="proj-tag">MS SQL Server</span><span class="proj-tag">Autosys</span><span class="proj-tag">Linux</span></div>
+          </div>
+
+          <div class="proj-card reveal">
+            <div class="proj-num">04</div>
+            <div class="proj-title">Smart Walking Stick</div>
+            <div class="proj-desc">Engineering final year project — obstacle detection for visually impaired users with noise reduction and live GPS location sharing via a safety trigger button.</div>
+            <div class="proj-tags"><span class="proj-tag">IoT</span><span class="proj-tag">Embedded Systems</span><span class="proj-tag">GPS</span></div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="card" id="skills">
+        <div class="card-title">Skills</div>
+        <div class="skill-group">
+          <div class="skill-name">Reporting &amp; Analytics</div>
+          <div class="tags"><span class="tag hl2">Power BI</span><span class="tag hl2">Tableau</span></div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-name">Languages</div>
+          <div class="tags"><span class="tag hl">SQL</span><span class="tag hl">PL/SQL</span></div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-name">Databases</div>
+          <div class="tags"><span class="tag">Oracle 12C/19C</span><span class="tag">MS SQL Server</span><span class="tag">Snowflake</span><span class="tag">PostgreSQL</span></div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-name">Automation &amp; Apps</div>
+          <div class="tags"><span class="tag">Power Automate</span><span class="tag">Power Apps</span><span class="tag">Autosys</span></div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-name">Cloud &amp; Big Data</div>
+          <div class="tags"><span class="tag">AWS</span><span class="tag">Hadoop</span><span class="tag">Hive</span><span class="tag">HBase</span></div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-name">DevOps &amp; Tools</div>
+          <div class="tags"><span class="tag">GitHub</span><span class="tag">Jenkins</span><span class="tag">JIRA</span><span class="tag">ServiceNow</span><span class="tag">Visio</span></div>
+        </div>
+      </div>
+
+      <div class="card" id="education">
+        <div class="card-title">Education</div>
+        <div class="edu-item">
+          <div class="edu-deg">MSc Business Analytics</div>
+          <div class="edu-school">University of Galway, Ireland</div>
+          <div class="edu-year">2025 – Present</div>
+          <span class="edu-badge">1.1 Expected</span>
+        </div>
+        <div class="edu-item">
+          <div class="edu-deg">BEng Electronics &amp; Communication Engineering</div>
+          <div class="edu-school">Vel Tech High Tech Dr. Rangarajan Dr. Sakunthala Engineering College, India</div>
+          <div class="edu-year">2017 – 2021</div>
+          <span class="edu-badge">CGPA 7.58 / 10</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Certifications</div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div><div class="cert-name">Microsoft Certified Data Analyst Associate (PL-300)</div><div class="cert-issuer">Microsoft · 2025</div></div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div><div class="cert-name">Google Data Analytics Professional Certificate</div><div class="cert-issuer">Coursera · 2023</div></div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div><div class="cert-name">Microsoft Power Automate</div><div class="cert-issuer">Udemy · 2024</div></div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div><div class="cert-name">General Data Protection Regulation (GDPR)</div><div class="cert-issuer">2026</div></div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div><div class="cert-name">Employability Awards</div><div class="cert-issuer">University of Galway · 2026</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Achievements &amp; Interests</div>
+        <div class="ach-item">
+          <div class="ach-glyph">🏅</div>
+          <div>
+            <div class="ach-name">NCC — State 'C' Certificate</div>
+            <div class="ach-desc">2017–2020 · National and state-level camps developing discipline, loyalty and leadership.</div>
+          </div>
+        </div>
+        <div class="ach-item">
+          <div class="ach-glyph">🏸</div>
+          <div>
+            <div class="ach-name">Badminton — College Team</div>
+            <div class="ach-desc">Represented the college badminton team during undergraduate studies.</div>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+</div>
+
+<div class="divider" style="max-width:100%"></div>
+<footer class="section-wrap">
+  <span class="footer-name">Ganesh Iyappan</span>
+  <p>© 2026 · Galway, Ireland · ganeshiyappan01@gmail.com</p>
+</footer>
+
+<script>
+const els = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.12 });
+els.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
